@@ -1,5 +1,7 @@
 -c constraints.txt
 
+cookiecutter
+
 Plone
 
 # List of add-ons that are needed.

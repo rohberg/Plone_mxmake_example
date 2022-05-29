@@ -1,0 +1,6 @@
+-c constraints.txt
+
+Plone
+
+# List of add-ons that are needed.
+collective.easyform

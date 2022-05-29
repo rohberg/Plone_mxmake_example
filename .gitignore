@@ -1,2 +1,7 @@
+venv/
+.installed.txt
+.sentinels/
+constraints-mxdev.txt
+requirements-mxdev.txt
 
 .vscode/

@@ -3,6 +3,9 @@
 With add-on collective.easyform.\
 plone.api and plone.restapi checked out from source.
 
+See project settings: https://github.com/rohberg/Plone_mxmake_example/compare/initial-commit...working-instance-with-test-script
+
+
 ## Files
 
 Plone packages
@@ -18,3 +21,4 @@ Installation Add-ons
 Zope configuration
 
 - instance.yaml
+

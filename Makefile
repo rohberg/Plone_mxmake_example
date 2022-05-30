@@ -170,6 +170,7 @@ instance: $(INSTANCE_SENTINEL) ## Create Zope configuration
 # run
 ###############################################################################
 
+# TODO remove inituser
 RUN_SENTINEL:=$(SENTINEL_FOLDER)/run.sentinel
 $(RUN_SENTINEL): $(INSTANCE_SENTINEL)
 	@echo "Run Zope instance"
@@ -217,10 +218,9 @@ docs-clean:
 TEST_COMMAND?=$(SCRIPTS_FOLDER)/run-tests.sh
 
 .PHONY: test
-test: $(FILES_SENTINEL) $(SOURCES_SENTINEL) $(INSTALL_SENTINEL)
+test: $(FILES_SENTINEL) $(SOURCES_SENTINEL) $(INSTALL_SENTINEL) ## Run tests. Pass argument "package" to test one package only.
 	@echo "Run tests"
-	@test -z "$(TEST_COMMAND)" && echo "No test command defined"
-	@test -z "$(TEST_COMMAND)" || bash -c "$(TEST_COMMAND)"
+	@test -f "$(TEST_COMMAND)" && bash -c "$(TEST_COMMAND) $(package)" || echo "No test command defined"
 
 ###############################################################################
 # coverage

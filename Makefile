@@ -19,6 +19,15 @@ $(SENTINEL):
 	@mkdir -p $(SENTINEL_FOLDER)
 	@echo "Sentinels for the Makefile process." > $(SENTINEL)
 
+.DEFAULT_GOAL   = help
+
+# Add the following 'help' target to your Makefile
+# And add help text after each target name starting with '\#\#'
+.PHONY: help
+help: ## This help message
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+
 ###############################################################################
 # venv
 ###############################################################################
@@ -26,6 +35,7 @@ $(SENTINEL):
 PYTHON_BIN?=python3
 VENV_FOLDER?=venv
 PIP_BIN:=$(VENV_FOLDER)/bin/pip
+PY_BIN_FOLDER:=$(VENV_FOLDER)/bin/
 
 # This setting is for customizing the installation of mxdev. Normally only
 # needed if working on mxdev development.
@@ -137,11 +147,37 @@ $(INSTALL_SENTINEL): $(SOURCES_SENTINEL)
 	@touch $(INSTALL_SENTINEL)
 
 .PHONY: install
-install: $(INSTALL_SENTINEL)
+install: $(INSTALL_SENTINEL) ## Install Python packages
 
 .PHONY: install-dirty
 install-dirty:
 	@rm -f $(INSTALL_SENTINEL)
+
+###############################################################################
+# instance
+###############################################################################
+
+INSTANCE_SENTINEL:=$(SENTINEL_FOLDER)/instance.sentinel
+$(INSTANCE_SENTINEL): $(INSTALL_SENTINEL)
+	@echo "Create Zope configuration"
+	@$(PY_BIN_FOLDER)/cookiecutter -f --no-input --config-file instance.yaml https://github.com/plone/cookiecutter-zope-instance
+	@touch $(INSTANCE_SENTINEL)
+
+.PHONY: instance
+instance: $(INSTANCE_SENTINEL) ## Create Zope configuration
+
+###############################################################################
+# run
+###############################################################################
+
+RUN_SENTINEL:=$(SENTINEL_FOLDER)/run.sentinel
+$(RUN_SENTINEL): $(INSTANCE_SENTINEL)
+	@echo "Run Zope instance"
+	@$(PY_BIN_FOLDER)/runwsgi instance/etc/zope.ini
+	@touch $(RUN_SENTINEL)
+
+.PHONY: run
+run: $(RUN_SENTINEL) ## run Zope instance
 
 ###############################################################################
 # system dependencies

@@ -1,6 +1,6 @@
 # Plone 6 installation from source
 
-With add-on collective.easyform.
+With add-on collective.easyform.\
 plone.api and plone.restapi checked out from source.
 
 ## Files

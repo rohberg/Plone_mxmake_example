@@ -6,3 +6,4 @@ venv/
 constraints-mxdev.txt
 requirements-mxdev.txt
 sources/
+instance/

@@ -3,6 +3,7 @@
 cookiecutter
 
 Plone
+zope.testrunner
 
 # List of add-ons that are needed.
 collective.easyform

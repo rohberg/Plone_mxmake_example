@@ -3,6 +3,6 @@ default_context:
   initial_user_password: "admin"
 
   load_zcml:
-    package_includes: ["collective.easyform"]
+    package_includes: ["collective.easyform", collective.bookmarks]
 
   db_storage: direct

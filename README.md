@@ -1,4 +1,4 @@
-# Plone 6 installation from source
+# Plone 6 backend installation from scratch
 
 With add-on collective.easyform.\
 plone.api and plone.restapi checked out from source.

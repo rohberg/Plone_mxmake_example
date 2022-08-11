@@ -22,3 +22,33 @@ Zope configuration
 
 - instance.yaml
 
+
+## Installation
+
+local Python:
+
+```shell
+python3.9 -m venv venv
+source venv/bin/activate
+pip install -U pip wheel mxdev
+mxdev -c mx.ini
+```
+
+Install your Plone packages:
+
+```shell
+pip install -r requirements-mxdev.txt
+```
+
+Generate your Zope configuration with cookiecutter.
+This is also necessary after changes of `instance.yaml`.
+
+```shell
+cookiecutter -f --no-input --config-file instance.yaml https://github.com/plone/cookiecutter-zope-instance
+```
+
+Run Zope:
+
+```shell
+runwsgi instance/etc/zope.ini
+```

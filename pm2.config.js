@@ -1,7 +1,7 @@
 let apps = [
     {
       name   : "plone_backend_tutorial",
-      script: 'runwsgi instance/etc/zope.ini',
+      script: 'venv/bin/runwsgi instance/etc/zope.ini',
       cwd: 'backend'
     },
     // {
